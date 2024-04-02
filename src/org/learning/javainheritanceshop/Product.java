@@ -10,11 +10,11 @@ public class Product {
     private BigDecimal price;
     private final BigDecimal VAT = BigDecimal.valueOf(0.20);
 
-    public Product(String name, String description, BigDecimal price) {
+    public Product(String name, String description, String price) {
         this.code = new Random().nextInt(100000000);
         this.name = name;
         this.description = description;
-        this.price = price;
+        this.price = BigDecimal.valueOf(Double.parseDouble(price)).setScale(2, RoundingMode.HALF_EVEN);
     }
 
     public int getCode() {
@@ -53,15 +53,12 @@ public class Product {
         return (price.add(price.multiply(VAT))).setScale(2, RoundingMode.HALF_EVEN);
     }
 
-    public void printDetails() {
-        System.out.println("\n" +
+    public String printDetails() {
+        return "\n" +
                 "*************** " + getExtendedName() + " ***************" + "\n" +
                 "Product N°" + getCode() + "\n" +
-                name + "\n" +
-                description + "\n" +
-                "€" + price + " (€" + getPriceWithVAT() + " including VAT of " + VAT.movePointRight(2) + "%)" + "\n" +
-                "*************** " + getExtendedName() + " ***************"
-        );
-
+                "Name: " + name + "\n" +
+                "Description: " + description + "\n" +
+                "Price: €" + price + " (€" + getPriceWithVAT() + " including VAT of " + VAT.movePointRight(2) + "%)";
     }
 }
