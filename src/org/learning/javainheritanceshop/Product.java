@@ -52,4 +52,16 @@ public class Product {
     public BigDecimal getPriceWithVAT() {
         return (price.add(price.multiply(VAT))).setScale(2, RoundingMode.HALF_EVEN);
     }
+
+    public void printDetails() {
+        System.out.println("\n" +
+                "*************** " + getExtendedName() + " ***************" + "\n" +
+                "Product N°" + getCode() + "\n" +
+                name + "\n" +
+                description + "\n" +
+                "€" + price + " (€" + getPriceWithVAT() + " including VAT of " + VAT.movePointRight(2) + "%)" + "\n" +
+                "*************** " + getExtendedName() + " ***************"
+        );
+
+    }
 }
