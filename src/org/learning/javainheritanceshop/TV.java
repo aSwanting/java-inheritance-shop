@@ -12,6 +12,6 @@ public class TV extends Product {
 
     @Override
     public String printDetails() {
-        return super.printDetails() + "\n" + "Size: " + size + "\n" + "Smart: " + (isSmart ? "Yes" : "No");
+        return super.printDetails() + "\n" + "Size: " + size + " inches \n" + "Smart: " + (isSmart ? "Yes" : "No");
     }
 }
