@@ -5,10 +5,10 @@ import java.math.RoundingMode;
 import java.util.Random;
 
 public class Product {
+    private final BigDecimal VAT = BigDecimal.valueOf(0.20);
     private int code;
     private String name, description;
-    private BigDecimal price;
-    private final BigDecimal VAT = BigDecimal.valueOf(0.20);
+    private BigDecimal price, discountRate;
 
     public Product(String name, String description, String price) {
         this.code = new Random().nextInt(100000000);
@@ -49,6 +49,20 @@ public class Product {
         this.price = price;
     }
 
+    public BigDecimal getVAT() {
+        return VAT;
+    }
+
+    public void setDiscountRate(BigDecimal discountRate) {
+        this.discountRate = discountRate;
+    }
+
+    public BigDecimal getDiscountedPrice() {
+
+        return price.multiply(discountRate);
+
+    }
+
     public BigDecimal getPriceWithVAT() {
         return (price.add(price.multiply(VAT))).setScale(2, RoundingMode.HALF_EVEN);
     }
@@ -58,7 +72,6 @@ public class Product {
                 "*************** " + getExtendedName() + " ***************" + "\n" +
                 "Product N°" + getCode() + "\n" +
                 "Name: " + name + "\n" +
-                "Description: " + description + "\n" +
-                "Price: €" + price + " (€" + getPriceWithVAT() + " including VAT of " + VAT.movePointRight(2) + "%)";
+                "Description: " + description;
     }
 }
